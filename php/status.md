@@ -4,6 +4,7 @@
 
 * [Accumulate](https://exercism.org/tracks/php/exercises/accumulate) `Easy`
 * [Acronym](https://exercism.org/tracks/php/exercises/acronym) `Easy`
+* [Anagram](https://exercism.org/tracks/php/exercises/anagram) `Easy`
 * [Armstrong Numbers](https://exercism.org/tracks/php/exercises/armstrong-numbers) `Easy`
 * [Gigasecond](https://exercism.org/tracks/php/exercises/gigasecond) `Easy`
 * [Hamming](https://exercism.org/tracks/php/exercises/hamming) `Easy`
@@ -18,7 +19,6 @@
 
 ## In Progress
 
-* [Anagram](https://exercism.org/tracks/php/exercises/anagram) `Easy`
 * [Phone Number](https://exercism.org/tracks/php/exercises/phone-number) `Easy`
 * [Bob](https://exercism.org/tracks/php/exercises/bob) `Medium`
 * [Crypto Square](https://exercism.org/tracks/php/exercises/crypto-square) `Easy`

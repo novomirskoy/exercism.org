@@ -26,29 +26,40 @@ declare(strict_types=1);
 
 function detectAnagrams(string $word, array $anagrams): array
 {
-    $lettersSum = static function ($word): int {
-        return array_reduce(array_unique(str_split(strtolower($word))), static function ($carry, $item) {
-            $carry += ord($item);
-
-            return $carry;
-        }, 0);
-    };
-
-    $wordSum = $lettersSum($word);
-
     $result = [];
 
-    foreach ($anagrams as $variant) {
-        if (strtolower($word) === strtolower($variant)) {
+    $wordLettersCount = lettersCounter($word);
+
+    foreach ($anagrams as $anagram) {
+        if (mb_strtolower($word) === mb_strtolower($anagram)) {
             continue;
         }
 
-        $variantSum = $lettersSum($variant);
-
-        if ($wordSum === $variantSum && count(str_split($word)) === count(str_split($variant))) {
-            $result[] = $variant;
+        if (mb_strlen($word) !== mb_strlen($anagram)) {
+            continue;
         }
+
+        if (count(array_diff_assoc(lettersCounter($anagram), $wordLettersCount)) > 0) {
+            continue;
+        }
+
+        $result[] = $anagram;
     }
 
     return $result;
 }
+
+function lettersCounter ($word): array {
+    $counter = [];
+
+    foreach (mb_str_split(mb_strtolower($word)) as $letter) {
+        if (array_key_exists($letter, $counter)) {
+            ++$counter[$letter];
+        } else {
+            $counter[$letter] = 1;
+        }
+    }
+
+    return $counter;
+}
+
