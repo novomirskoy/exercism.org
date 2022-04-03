@@ -24,12 +24,31 @@
 
 declare(strict_types=1);
 
-function toRna(string $dna): string
+function detectAnagrams(string $word, array $anagrams): array
 {
-    return strtr($dna, [
-        'G' => 'C',
-        'C' => 'G',
-        'T' => 'A',
-        'A' => 'U',
-    ]);
+    $lettersSum = static function ($word): int {
+        return array_reduce(array_unique(str_split(strtolower($word))), static function ($carry, $item) {
+            $carry += ord($item);
+
+            return $carry;
+        }, 0);
+    };
+
+    $wordSum = $lettersSum($word);
+
+    $result = [];
+
+    foreach ($anagrams as $variant) {
+        if (strtolower($word) === strtolower($variant)) {
+            continue;
+        }
+
+        $variantSum = $lettersSum($variant);
+
+        if ($wordSum === $variantSum && count(str_split($word)) === count(str_split($variant))) {
+            $result[] = $variant;
+        }
+    }
+
+    return $result;
 }

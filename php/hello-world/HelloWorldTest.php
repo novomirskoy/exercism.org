@@ -24,12 +24,15 @@
 
 declare(strict_types=1);
 
-function toRna(string $dna): string
+class HelloWorldTest extends PHPUnit\Framework\TestCase
 {
-    return strtr($dna, [
-        'G' => 'C',
-        'C' => 'G',
-        'T' => 'A',
-        'A' => 'U',
-    ]);
+    public static function setUpBeforeClass(): void
+    {
+        require_once 'HelloWorld.php';
+    }
+
+    public function testHelloWorld(): void
+    {
+        $this->assertEquals('Hello, World!', helloWorld());
+    }
 }

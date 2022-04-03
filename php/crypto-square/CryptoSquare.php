@@ -24,12 +24,21 @@
 
 declare(strict_types=1);
 
-function toRna(string $dna): string
+function crypto_square(string $plaintext): string
 {
-    return strtr($dna, [
-        'G' => 'C',
-        'C' => 'G',
-        'T' => 'A',
-        'A' => 'U',
-    ]);
+    $normalize = static function ($nonNormalizeString): array {
+        $nonNormalizeString = trim($nonNormalizeString);
+        $nonNormalizeString = strtolower($nonNormalizeString);
+        preg_match_all('/[a-z\d]+/', $nonNormalizeString, $matches);
+
+        return $matches[0];
+    };
+
+    $normalized = $normalize($plaintext);
+
+    if (count($normalized) === 0) {
+        return '';
+    }
+
+    return implode('', $normalized);
 }

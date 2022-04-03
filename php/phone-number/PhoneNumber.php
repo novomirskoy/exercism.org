@@ -24,12 +24,30 @@
 
 declare(strict_types=1);
 
-function toRna(string $dna): string
+class PhoneNumber
 {
-    return strtr($dna, [
-        'G' => 'C',
-        'C' => 'G',
-        'T' => 'A',
-        'A' => 'U',
-    ]);
+    /**
+     * @var string
+     */
+    private string $rawNumber;
+
+    public function __construct(string $rawNumber)
+    {
+        if (preg_match('/[a-zA-Z]+/', $rawNumber)) {
+            throw new InvalidArgumentException('letters not permitted');
+        }
+
+        if (strlen($rawNumber) > 11) {
+            throw new InvalidArgumentException('more than 11 digits');
+        }
+
+//        \(?(\d{3})\)?[.\-\s]*(\d{3})[.\-\s]*(\d{4})
+
+        $this->rawNumber = $rawNumber;
+    }
+
+    public function number(): string
+    {
+        return $this->rawNumber;
+    }
 }

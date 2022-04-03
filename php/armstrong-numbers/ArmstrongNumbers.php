@@ -26,5 +26,12 @@ declare(strict_types=1);
 
 function isArmstrongNumber(int $number): bool
 {
-    throw new \BadFunctionCallException("Implement the isArmstrongNumber function");
+    $numbers = str_split((string)$number);
+    $power = count($numbers);
+
+    return $number === array_reduce($numbers, static function ($carry, $item) use ($power) {
+            $carry += $item ** $power;
+
+            return $carry;
+        });
 }

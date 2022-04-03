@@ -24,12 +24,28 @@
 
 declare(strict_types=1);
 
-function toRna(string $dna): string
+class Bob
 {
-    return strtr($dna, [
-        'G' => 'C',
-        'C' => 'G',
-        'T' => 'A',
-        'A' => 'U',
-    ]);
+    public function respondTo(string $phrase): string
+    {
+        $phrase = trim($phrase);
+
+        if (empty($phrase)) {
+            return 'Fine. Be that way!';
+        }
+
+        if (preg_match('/[A-Z\s]+\?/u', $phrase, $matches) && $matches[0] === $phrase) {
+            return 'Calm down, I know what I\'m doing!';
+        }
+
+        if (preg_match('/[A-Za-z\s\W\d]+\?$/u', $phrase, $matches) && $matches[0] === $phrase) {
+            return 'Sure.';
+        }
+
+        if (preg_match('/[A-Z\s\W]+/u', $phrase, $matches) && $matches[0] === $phrase) {
+            return 'Whoa, chill out!';
+        }
+
+        return 'Whatever.';
+    }
 }
